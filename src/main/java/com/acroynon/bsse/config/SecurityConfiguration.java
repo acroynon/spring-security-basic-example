@@ -16,34 +16,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/admin")
-			.hasRole("ADMIN")
-		.antMatchers("/login")
-				.permitAll()
-				.anyRequest().authenticated()
-			.and()
-			.formLogin()
-				.loginPage("/login")
-				.defaultSuccessUrl("/")
-			.and()
-				.csrf().disable();
+		.antMatchers("/admin").hasRole("ADMIN")
+		.antMatchers("/login").permitAll()
+		.antMatchers("/css/**").permitAll()
+		.antMatchers("/js/**").permitAll()
+		.antMatchers("/lib/**").permitAll()
+		.anyRequest().authenticated()
+		.and()
+		.formLogin()
+			.loginPage("/login")
+			.defaultSuccessUrl("/")
+		.and()
+			.csrf().disable();
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-			.withUser("user").password(passwordEncoder.encode("pass1")).roles("USER")
-			.and()
-			.withUser("admin").password(passwordEncoder.encode("pass2")).roles("ADMIN");
+		.withUser("user").password(passwordEncoder.encode("pass1")).roles("USER")
+		.and()
+		.withUser("admin").password(passwordEncoder.encode("pass2")).roles("ADMIN");
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 }

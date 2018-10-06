@@ -1,0 +1,21 @@
+<div class="container">
+
+<div class="nav nav-bar">
+
+	<a class="navbar-brand" href="/">
+	    <i id="logo-icon" class="fas fa-leaf"></i>
+	    Spring Security Demo App
+	</a>
+	<a class="nav-item nav-link" href="/" sec:authorize="isAuthenticated()">
+		Home
+	</a>
+	<a class="nav-item nav-link" href="/admin" sec:authorize="hasRole('ADMIN')">
+		Admin
+	</a>
+	<a class="nav-item nav-link" href="/logout" sec:authorize="isAuthenticated()">
+		Log Out
+	</a>
+
+</div>
+
+<!--  Don't close container div -->
