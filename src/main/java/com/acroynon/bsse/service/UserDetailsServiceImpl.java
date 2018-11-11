@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.acroynon.bsse.model.User;
+import com.acroynon.bsse.model.data.User;
 import com.acroynon.bsse.repository.UserRepository;
 
 @Service

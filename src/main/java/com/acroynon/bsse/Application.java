@@ -11,8 +11,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.acroynon.bsse.model.Role;
-import com.acroynon.bsse.model.User;
+import com.acroynon.bsse.model.data.Role;
+import com.acroynon.bsse.model.data.User;
 import com.acroynon.bsse.repository.RoleRepository;
 import com.acroynon.bsse.repository.UserRepository;
 

@@ -1,4 +1,4 @@
-package com.acroynon.bsse.model;
+package com.acroynon.bsse.model.data;
 
 import java.util.List;
 import java.util.UUID;
