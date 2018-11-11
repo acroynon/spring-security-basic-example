@@ -7,7 +7,43 @@
 </head>
 <body>
 	<th:block th:include="fragments/header.html"></th:block>
-	<h1>Home Page</h1>
+	<h1>Home Page</h1>	
+	<div class="card">
+		<div class="card-body">		
+			<h3>Users</h3>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>User</td>
+						<td>John</td>
+						<td>Smith</td>
+						<td>Online</td>
+					</tr>
+					<tr>
+						<td>User</td>
+						<td>John</td>
+						<td>Smith</td>
+						<td>Online</td>
+					</tr>
+					<tr>
+						<td>User</td>
+						<td>John</td>
+						<td>Smith</td>
+						<td>Online</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
 	<th:block th:include="fragments/footer.html"></th:block>
 </body>
 </html>

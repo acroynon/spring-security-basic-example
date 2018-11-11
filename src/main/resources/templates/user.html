@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+<th:block th:include="fragments/libraries-imports.html"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/header.html"></th:block>
+	<h1>User Page</h1>
+	
+	<div>
+		<p> Username: <span th:text="${user.username}"></span></p>
+		<p> First Name: <span th:text="${user.firstName}"></span></p>
+		<p> Last Name: <span th:text="${user.lastName}"></span></p>
+		<p> Status: `Online` </p>
+	</div>
+	
+	
+	<th:block th:include="fragments/footer.html"></th:block>
+</body>
+</html>	

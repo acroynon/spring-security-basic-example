@@ -9,8 +9,8 @@
 	<a class="nav-item nav-link" href="/" sec:authorize="isAuthenticated()">
 		Home
 	</a>
-	<a class="nav-item nav-link" href="/admin" sec:authorize="hasRole('ADMIN')">
-		Admin
+	<a class="nav-item nav-link" href="/profile" sec:authorize="isAuthenticated()">
+		Profile
 	</a>
 	<a class="nav-item nav-link" href="/logout" sec:authorize="isAuthenticated()">
 		Log Out

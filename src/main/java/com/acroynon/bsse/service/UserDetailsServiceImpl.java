@@ -12,7 +12,7 @@ import com.acroynon.bsse.model.User;
 import com.acroynon.bsse.repository.UserRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService{	
 
 	@Autowired
 	private UserRepository userRepository;
