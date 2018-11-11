@@ -7,11 +7,11 @@
 </head>
 <body>
 	<th:block th:include="fragments/header.html"></th:block>
-	<h1>Login</h1>
+	<h1>Register</h1>
 	<div th:if="${param.error}" class="alert alert-danger" role="alert">
-	   Incorrect username and/or password.
+	   Error occured. Either Passwords don't match or username already exists.
 	</div>
-	<form method="POST" action="/login">
+	<form method="POST" action="/register">
 	  <div class="form-group">
 	  	<label for="username">Username</label>
 	    <input type="text" class="form-control" id="username" name="username">
@@ -20,10 +20,12 @@
 	  	<label for="password">Password</label>
 	    <input type="password" class="form-control" id="password" name="password">
 	  </div>
-	  <button type="submit" class="btn btn-primary">Login</button>
+	  <div class="form-group">
+	  	<label for="passwordAgain">Password Again</label>
+	    <input type="password" class="form-control" id="passwordAgain" name="passwordAgain">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Register</button>
 	</form>
-	<hr/>
-	<a href="/register" class="btn btn-primary">Register</a>
 	
 	<th:block th:include="fragments/footer.html"></th:block>
 </body>

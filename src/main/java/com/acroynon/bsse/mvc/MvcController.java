@@ -5,14 +5,19 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.acroynon.bsse.model.adaptor.UserAdaptor;
 import com.acroynon.bsse.model.data.User;
+import com.acroynon.bsse.model.dto.UserRegisterDTO;
 import com.acroynon.bsse.repository.UserRepository;	
 
 @Controller
@@ -20,6 +25,8 @@ public class MvcController {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserAdaptor userAdaptor;
@@ -52,7 +59,7 @@ public class MvcController {
 	
 	@ExceptionHandler({UsernameNotFoundException.class})
 	public String errorPage(Model model, Exception e){
-		model.addAttribute("error", e);
+		model.addAttribute("message", "Opps! Something went wrong!");
 		return "error";
 	}
 	
@@ -62,6 +69,26 @@ public class MvcController {
 			throw new UsernameNotFoundException("User does not exist: " + username);
 		}
 		return user;
+	}
+	
+	@GetMapping("/register")
+	public String registerPage(){
+		return "register";
+	}
+	
+	@PostMapping("/register")
+	private String registerUser(@ModelAttribute UserRegisterDTO userRegisterDTO){
+		User user = new User();
+		user.setUsername(userRegisterDTO.getUsername());
+		user.setPassword(passwordEncoder.encode("pass1"));
+		userRepository.save(user);
+		return "login";
+	}
+	
+	@DeleteMapping("/user/{username}")
+	private String deleteUser(@PathVariable("username") String username){
+		userRepository.delete(userRepository.findUserByUsername(username));
+		return "login";
 	}
 	
 }

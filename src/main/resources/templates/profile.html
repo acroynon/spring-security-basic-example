@@ -48,8 +48,10 @@
 	</div>
 	
 	<div class="card m-1">
-		<div class="card-body mx-auto">		
-			<button class="btn btn-danger">Delete Account</button>
+		<div class="card-body mx-auto">	
+			<form th:method="DELETE" th:action="@{/user/} + ${user.username}">	
+				<button type="submit" class="btn btn-danger">Delete Account</button>
+			</form>
 		</div>
 	</div>
 	
