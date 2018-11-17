@@ -91,4 +91,9 @@ public class MvcController {
 		return "login";
 	}
 	
+	@GetMapping("/createUser")
+	private String createUserPage(){
+		return "createUser";
+	}
+	
 }

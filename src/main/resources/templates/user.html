@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
 <meta charset="ISO-8859-1">
 <title>Home Page</title>
@@ -8,14 +8,26 @@
 <body>
 	<th:block th:include="fragments/header.html"></th:block>
 	<h1>User Page</h1>
-	
-	<div>
-		<p> Username: <span th:text="${user.username}"></span></p>
-		<p> First Name: <span th:text="${user.firstName}"></span></p>
-		<p> Last Name: <span th:text="${user.lastName}"></span></p>
+	<div class="card m-1">
+		<div class="card-body">
+			<div>
+				<p> Username: <span th:text="${user.username}"></span></p>
+				<p> First Name: <span th:text="${user.firstName}"></span></p>
+				<p> Last Name: <span th:text="${user.lastName}"></span></p>
+			</div>
+		</div>
 	</div>
-	
-	
+	<div class="card m-1" sec:authorize="hasRole('ROLE_ADMIN')">
+		<div class="card-body">
+			<div class="text-center">
+				<a href="#" class="btn btn-primary">Give/Revoke Admin Privileges</a>
+				<a href="#" class="btn btn-info">Lock/Unlock User</a>
+				<form th:method="DELETE" th:action="@{/user/} + ${user.username}" class="mt-1">	
+					<button type="submit" class="btn btn-danger">Delete Account</button>
+				</form>
+			</div>
+		</div>
+	</div>
 	<th:block th:include="fragments/footer.html"></th:block>
 </body>
 </html>	

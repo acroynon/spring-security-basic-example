@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Create User</title>
+<th:block th:include="fragments/libraries-imports.html"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/header.html"></th:block>
+	<h1>Create User Page</h1>
+		<div class="card m1">
+			<div class="card-body">
+				<h3>Create User</h3>
+				<form method="POST" action="/user">
+				  <div class="form-group">
+				  	<label for="username">Username</label>
+				    <input type="text" class="form-control" id="username" name="username">
+				  </div>
+				  <div class="form-group">
+				  	<label for="password">Password</label>
+				    <input type="password" class="form-control" id="password" name="password">
+				  </div>
+				  <div class="text-center">
+				  	<button type="submit" class="btn btn-primary">Register</button>
+				  </div>
+				</form>
+			</div>
+		</div>
+	<th:block th:include="fragments/footer.html"></th:block>
+</body>
+</html>

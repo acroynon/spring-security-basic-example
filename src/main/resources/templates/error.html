@@ -2,14 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Login Page</title>
+<title>Error</title>
 <th:block th:include="fragments/libraries-imports.html"></th:block>
 </head>
 <body>
 	<th:block th:include="fragments/header.html"></th:block>
-	<h1>Error!</h1>
-	<h3>An Error has occured</h3>
-	<p th:text="${message}"></p>
+	<h1>Error Page</h1>
+	<div class="card">
+		<div class="card-body">
+			<h3>An Error has occured</h3>
+			<p th:text="${message}"></p>	
+		</div>
+	</div>
 	<th:block th:include="fragments/footer.html"></th:block>
 </body>
 </html>

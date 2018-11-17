@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
 <meta charset="ISO-8859-1">
 <title>Home Page</title>
@@ -8,7 +8,12 @@
 <body>
 	<th:block th:include="fragments/header.html"></th:block>
 	<h1>Home Page</h1>	
-	<div class="card">
+	<div class="card text-center m-1" sec:authorize="hasRole('ROLE_ADMIN')">
+		<div class="card-body">
+			<a href="\createUser" class="btn btn-primary">Create User</a>
+		</div>
+	</div>
+	<div class="card m-1">
 		<div class="card-body">		
 			<h3>Users</h3>
 			<table class="table table-hover">
@@ -21,7 +26,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="user : ${users}">
-						<td th:text="${user.username}"></td>
+						<td><a th:href="@{'/user/' + ${user.username}}" th:text="${user.username}"></a></td>
 						<td th:text="${user.firstName}"></td>
 						<td th:text="${user.lastName}"></td>
 					</tr>
@@ -29,7 +34,6 @@
 			</table>
 		</div>
 	</div>
-	
 	<th:block th:include="fragments/footer.html"></th:block>
 </body>
 </html>
