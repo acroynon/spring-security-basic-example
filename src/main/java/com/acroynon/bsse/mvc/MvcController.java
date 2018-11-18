@@ -95,9 +95,9 @@ public class MvcController {
 	}
 	
 	@DeleteMapping("/user/{username}")
-	private String deleteUser(@PathVariable("username") String username){
+	private String deleteUser(Model model, @PathVariable("username") String username){
 		userRepository.delete(userRepository.findUserByUsername(username));
-		return "/";
+		return homePage(model);
 	}
 	
 	@GetMapping("/createUser")
