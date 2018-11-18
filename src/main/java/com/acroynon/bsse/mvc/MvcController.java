@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.acroynon.bsse.model.adaptor.UserAdaptor;
 import com.acroynon.bsse.model.data.User;
+import com.acroynon.bsse.model.dto.PasswordDTO;
+import com.acroynon.bsse.model.dto.UserDTO;
 import com.acroynon.bsse.model.dto.UserRegisterDTO;
 import com.acroynon.bsse.repository.UserRepository;	
 
@@ -57,18 +59,25 @@ public class MvcController {
 		return "user";
 	}
 	
+	@PostMapping("/updateUser")
+	public String updateUser(Model model, Principal principal, @ModelAttribute UserDTO userDTO){
+		User user = userAdaptor.adaptToSource(userDTO);
+		userRepository.save(user);
+		return profilePage(model, principal);
+	}
+	
+	@PostMapping("/updatePassword")
+	public String updatePassword(Model model, Principal principal, @ModelAttribute PasswordDTO passwordDTO){
+		User user = getUserFromUsername(principal.getName());
+		user.setPassword(passwordEncoder.encode(passwordDTO.getPassword()));
+		userRepository.save(user);
+		return profilePage(model, principal);
+	}
+	
 	@ExceptionHandler({UsernameNotFoundException.class})
 	public String errorPage(Model model, Exception e){
 		model.addAttribute("message", "Opps! Something went wrong!");
 		return "error";
-	}
-	
-	private User getUserFromUsername(String username){
-		User user = userRepository.findUserByUsername(username);
-		if(user == null){
-			throw new UsernameNotFoundException("User does not exist: " + username);
-		}
-		return user;
 	}
 	
 	@GetMapping("/register")
@@ -88,12 +97,27 @@ public class MvcController {
 	@DeleteMapping("/user/{username}")
 	private String deleteUser(@PathVariable("username") String username){
 		userRepository.delete(userRepository.findUserByUsername(username));
-		return "login";
+		return "/";
 	}
 	
 	@GetMapping("/createUser")
 	private String createUserPage(){
 		return "createUser";
+	}
+	
+	@PostMapping("/createUser")
+	private String createNewUser(@ModelAttribute UserDTO userDTO){
+		User user = userAdaptor.adaptToSource(userDTO);
+		userRepository.save(user);
+		return "createUser";
+	}
+	
+	private User getUserFromUsername(String username){
+		User user = userRepository.findUserByUsername(username);
+		if(user == null){
+			throw new UsernameNotFoundException("User does not exist: " + username);
+		}
+		return user;
 	}
 	
 }

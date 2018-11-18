@@ -6,4 +6,6 @@ import com.acroynon.bsse.model.data.Role;
 
 public interface RoleRepository extends JpaRepository<Role, String>{
 
+	Role findByRoleName(String roleName);
+	
 }
