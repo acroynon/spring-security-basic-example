@@ -10,21 +10,20 @@
 	<h1>Register</h1>
 	<div class="card">
 		<div class="card-body">
-			<div th:if="${param.error}" class="alert alert-danger" role="alert">
-		   		Error occured. Either Passwords don't match or username already exists.
-			</div>
-			<form method="POST" action="/register">
+			<form method="POST" th:action="@{/register}" th:object="${data}" class="needs-validation">					
 			  <div class="form-group">
 			  	<label for="username">Username</label>
-			    <input type="text" class="form-control" id="username" name="username">
+			    <input type="text" class="form-control" th:field="*{username}" th:errorclass="is-invalid">
+			    <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 			  </div>
 			  <div class="form-group">
 			  	<label for="password">Password</label>
-			    <input type="password" class="form-control" id="password" name="password">
+			    <input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid">
+			    <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 			  </div>
 			  <div class="form-group">
 			  	<label for="passwordAgain">Password Again</label>
-			    <input type="password" class="form-control" id="passwordAgain" name="passwordAgain">
+			    <input type="password" class="form-control" th:field="*{passwordAgain}">
 			  </div>
 			  <button type="submit" class="btn btn-primary">Register</button>
 			</form>

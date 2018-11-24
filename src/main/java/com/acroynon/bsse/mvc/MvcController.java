@@ -1,7 +1,6 @@
 package com.acroynon.bsse.mvc;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,7 +18,6 @@ import com.acroynon.bsse.model.adaptor.UserAdaptor;
 import com.acroynon.bsse.model.data.User;
 import com.acroynon.bsse.model.dto.PasswordDTO;
 import com.acroynon.bsse.model.dto.UserDTO;
-import com.acroynon.bsse.model.dto.UserRegisterDTO;
 import com.acroynon.bsse.repository.UserRepository;	
 
 @Controller
@@ -36,13 +34,6 @@ public class MvcController {
 	@GetMapping("/login")
 	public String loginPage() {
 		return "login";
-	}
-	
-	@GetMapping("/")
-	public String homePage(Model model) {
-		List<User> users = userRepository.findAll();
-		model.addAttribute("users", userAdaptor.adaptAllToDTO(users));
-		return "home";
 	}
 	
 	@GetMapping("/profile")
@@ -80,24 +71,10 @@ public class MvcController {
 		return "error";
 	}
 	
-	@GetMapping("/register")
-	public String registerPage(){
-		return "register";
-	}
-	
-	@PostMapping("/register")
-	private String registerUser(@ModelAttribute UserRegisterDTO userRegisterDTO){
-		User user = new User();
-		user.setUsername(userRegisterDTO.getUsername());
-		user.setPassword(passwordEncoder.encode("pass1"));
-		userRepository.save(user);
-		return "login";
-	}
-	
 	@DeleteMapping("/user/{username}")
 	private String deleteUser(Model model, @PathVariable("username") String username){
 		userRepository.delete(userRepository.findUserByUsername(username));
-		return homePage(model);
+		return "/login";
 	}
 	
 	@GetMapping("/createUser")
