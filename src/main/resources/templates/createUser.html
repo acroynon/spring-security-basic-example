@@ -11,17 +11,32 @@
 		<div class="card m1">
 			<div class="card-body">
 				<h3>Create User</h3>
-				<form method="POST" action="/user">
+				<form method="POST" th:action="@{/createUser}" th:object="${data}" class="needs-validation">
 				  <div class="form-group">
 				  	<label for="username">Username</label>
-				    <input type="text" class="form-control" id="username" name="username">
+				    <input type="text" class="form-control" th:field="*{username}" th:errorclass="is-invalid">
+			    <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+				  </div>
+				  <div class="form-group">
+				  	<label for="username">First Name</label>
+				    <input type="text" class="form-control" th:field="*{firstName}" th:errorclass="is-invalid">
+				  </div>
+				  <div class="form-group">
+				  	<label for="username">Last Name</label>
+				    <input type="text" class="form-control" th:field="*{lastName}" th:errorclass="is-invalid">
 				  </div>
 				  <div class="form-group">
 				  	<label for="password">Password</label>
-				    <input type="password" class="form-control" id="password" name="password">
+				    <input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid">
+			    <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{username}"></p>
+				  </div>
+				  <div class="form-check">
+				  	<input type="checkbox" class="form-check-input" th:value="*{isAdmin}" th:field="*{isAdmin}" th:errorclass="is-invalid" />
+				  	<label for="isAdmin">Is Admin</label>
 				  </div>
 				  <div class="text-center">
-				  	<button type="submit" class="btn btn-primary">Register</button>
+				  	<p th:if="${successMessage != null}" th:text="${successMessage}"></p> 
+				  	<button type="submit" class="btn btn-primary">Create User</button>
 				  </div>
 				</form>
 			</div>

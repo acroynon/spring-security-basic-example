@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.acroynon.bsse.model.dto.UserRegisterDTO;
 import com.acroynon.bsse.service.UserService;
-import com.acroynon.bsse.validation.UserRegistrationValidator;
+import com.acroynon.bsse.validation.UserValidator;
 
 @Controller
 public class RegisterController {
 
 	@Autowired
-	private UserRegistrationValidator validator;
+	private UserValidator validator;
 	@Autowired
 	private UserService userService;
 	

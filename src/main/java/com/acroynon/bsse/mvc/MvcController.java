@@ -55,7 +55,7 @@ public class MvcController {
 		User user = userAdaptor.adaptToSource(userDTO);
 		userRepository.save(user);
 		return profilePage(model, principal);
-	}
+	} 
 	
 	@PostMapping("/updatePassword")
 	public String updatePassword(Model model, Principal principal, @ModelAttribute PasswordDTO passwordDTO){
@@ -75,18 +75,6 @@ public class MvcController {
 	private String deleteUser(Model model, @PathVariable("username") String username){
 		userRepository.delete(userRepository.findUserByUsername(username));
 		return "/login";
-	}
-	
-	@GetMapping("/createUser")
-	private String createUserPage(){
-		return "createUser";
-	}
-	
-	@PostMapping("/createUser")
-	private String createNewUser(@ModelAttribute UserDTO userDTO){
-		User user = userAdaptor.adaptToSource(userDTO);
-		userRepository.save(user);
-		return "createUser";
 	}
 	
 	private User getUserFromUsername(String username){
