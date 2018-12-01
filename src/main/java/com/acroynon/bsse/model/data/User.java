@@ -30,6 +30,8 @@ public class User {
 	
 	private String lastName;
 	
+	private boolean isLocked;
+	
 	@ManyToMany
 	@JoinTable(
 			name = "user_roles",

@@ -28,10 +28,11 @@ public class UserAdaptor extends Adaptor<User, UserDTO>{
 		user.setFirstName(dto.getFirstName());
 		user.setLastName(dto.getLastName());
 		user.setRoles(new ArrayList<Role>());
+		user.setLocked(dto.isLocked());
 		if(dto.isAdmin()){
-			user.getRoles().add(roleRepository.findByRoleName("ROLE_USER"));
+			user.getRoles().add(roleRepository.findByRoleName("USER"));
 		}else{
-			user.getRoles().add(roleRepository.findByRoleName("ROLE_ADMIN"));
+			user.getRoles().add(roleRepository.findByRoleName("ADMIN"));
 		}
 		return user;
 	}
@@ -41,6 +42,10 @@ public class UserAdaptor extends Adaptor<User, UserDTO>{
 		dto.setUsername(user.getUsername());
 		dto.setFirstName(user.getFirstName());
 		dto.setLastName(user.getLastName());
+		dto.setLocked(user.isLocked());
+		boolean isAdmin = user.getRoles().stream()
+				.filter(r -> r.getRoleName().equals("ADMIN")).findFirst().isPresent();
+		dto.setAdmin(isAdmin);
 		return dto;
 	}
 	

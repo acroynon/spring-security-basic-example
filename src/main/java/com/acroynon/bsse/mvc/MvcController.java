@@ -7,11 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.acroynon.bsse.model.adaptor.UserAdaptor;
@@ -31,23 +29,13 @@ public class MvcController {
 	@Autowired
 	private UserAdaptor userAdaptor;
 	
-	@GetMapping("/login")
-	public String loginPage() {
-		return "login";
-	}
+
 	
 	@GetMapping("/profile")
 	public String profilePage(Model model, Principal principal){
 		User user = getUserFromUsername(principal.getName());
 		model.addAttribute("user", userAdaptor.adaptToDTO(user));
 		return "profile";
-	}
-	
-	@GetMapping("/user/{username}")
-	public String userPage(Model model, @PathVariable("username") String username){
-		User user = getUserFromUsername(username);
-		model.addAttribute("user", userAdaptor.adaptToDTO(user));
-		return "user";
 	}
 	
 	@PostMapping("/updateUser")
@@ -69,12 +57,6 @@ public class MvcController {
 	public String errorPage(Model model, Exception e){
 		model.addAttribute("message", "Opps! Something went wrong!");
 		return "error";
-	}
-	
-	@DeleteMapping("/user/{username}")
-	private String deleteUser(Model model, @PathVariable("username") String username){
-		userRepository.delete(userRepository.findUserByUsername(username));
-		return "/login";
 	}
 	
 	private User getUserFromUsername(String username){

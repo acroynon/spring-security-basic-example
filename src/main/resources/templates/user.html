@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
 <meta charset="ISO-8859-1">
-<title>Home Page</title>
+<title>User Page | ${user.username}</title>
 <th:block th:include="fragments/libraries-imports.html"></th:block>
 </head>
 <body>
@@ -18,16 +18,45 @@
 		</div>
 	</div>
 	<div class="card m-1" sec:authorize="hasRole('ROLE_ADMIN')">
-		<div class="card-body">
-			<div class="text-center">
-				<a href="#" class="btn btn-primary">Give/Revoke Admin Privileges</a>
-				<a href="#" class="btn btn-info">Lock/Unlock User</a>
-				<form th:method="DELETE" th:action="@{/user/} + ${user.username}" class="mt-1">	
-					<button type="submit" class="btn btn-danger">Delete Account</button>
+		<div class="card-body">		
+			<h3
+			>Admin Functions</h3>
+			<hr>	
+			<div  class="text-center">
+				<form method="POST" th:action="@{/user/} + ${user.username}" th:object="${data}">
+					<div class="checkbox">
+						<i class="fas fa-angle-double-right"></i>
+						<input type="checkbox" data-toggle="toggle" th:field="*{isAdmin}"
+							data-on="User is admin" data-off="User is not an admin" 
+							data-onstyle="info" data-offstyle="secondary" />
+						<i class="fas fa-angle-double-left"></i>
+					</div>
+					<br/>	
+					<div class="checkbox">
+						<i class="fas fa-angle-double-right"></i>
+						<input type="checkbox" data-toggle="toggle" th:field="*{isLocked}"
+							data-on="User is locked" data-off="User is unlocked" 
+							data-onstyle="warning" data-offstyle="secondary" />
+						<i class="fas fa-angle-double-left"></i>
+					</div>
+					<br/>	
+					<div class="checkbox">
+						<i class="fas fa-angle-double-right"></i>
+						<input type="checkbox" data-toggle="toggle" th:field="*{isDeleted}"
+							data-on="Delete User" data-off="User is active" 
+							data-onstyle="danger" data-offstyle="secondary" />
+						<i class="fas fa-angle-double-left"></i>
+					</div>
+					<br/>				
+					<button class="btn btn-primary btn-lg btn-block">Update</button>
 				</form>
+				<p th:if="${successMessage != null}" th:text="${successMessage}"></p>
+				<p class="lead">
+				  Click on the different options to change the action, then click update.
+				</p>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<th:block th:include="fragments/footer.html"></th:block>
 </body>
 </html>	

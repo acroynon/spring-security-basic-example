@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,10 @@ public class UserService {
 		return userAdaptor.adaptAllToDTO(users);
 	}
 	
+	public UserDTO getUserDTOFromUsername(String username){
+		return userAdaptor.adaptToDTO(findUserByUsername(username));
+	}
+	
 	public boolean userExists(String username){
 		return (userRepository.findUserByUsername(username) != null);
 	}
@@ -59,6 +64,49 @@ public class UserService {
 		}
 		user.getRoles().add(roleRepository.findByRoleName(roleName));
 		userRepository.save(user);	
+	}
+	
+	public void giveAdminRights(String username){
+		changeRole(username, "ADMIN");
+	}
+	
+	public void revokeAdminRights(String username){
+		changeRole(username, "USER");
+	}
+	
+	public void lockUser(String username){
+		changeLockStatus(username, true);
+	}
+	
+	public void unlockUser(String username){
+		changeLockStatus(username, false);
+	}
+	
+	public void deleteUserAccount(String username){
+		User user = findUserByUsername(username);
+		userRepository.delete(user);
+	}
+	
+	private void changeRole(String username, String roleName){
+		List<Role> roleList = new ArrayList<Role>();
+		roleList.add(roleRepository.findByRoleName(roleName));
+		User user = findUserByUsername(username);
+		user.setRoles(roleList);
+		userRepository.save(user);
+	}
+	
+	private void changeLockStatus(String username, boolean isLocked){
+		User user = findUserByUsername(username);
+		user.setLocked(isLocked);
+		userRepository.save(user);
+	}
+	
+	private User findUserByUsername(String username){
+		User user = userRepository.findUserByUsername(username);
+		if(user == null){
+			throw new UsernameNotFoundException(username);
+		}
+		return user;
 	}
 	
 }
