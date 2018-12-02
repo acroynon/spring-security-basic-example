@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
 <meta charset="ISO-8859-1">
-<title>User Page | ${user.username}</title>
+<title th:text="'User Page | ' + ${user.username} "></title>
 <th:block th:include="fragments/libraries-imports.html"></th:block>
 </head>
 <body>

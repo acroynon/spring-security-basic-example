@@ -122,7 +122,7 @@ public class UserService {
 	private User findUserByUsername(String username){
 		User user = userRepository.findUserByUsername(username);
 		if(user == null){
-			throw new UsernameNotFoundException(username);
+			throw new UsernameNotFoundException("Username does not exist: '" + username + "'");
 		}
 		return user;
 	}
