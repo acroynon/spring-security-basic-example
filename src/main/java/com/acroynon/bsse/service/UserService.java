@@ -66,6 +66,24 @@ public class UserService {
 		userRepository.save(user);	
 	}
 	
+	public void updateUserDetails(UserDTO dto){
+		User user = findUserByUsername(dto.getUsername());
+		user.setFirstName(dto.getFirstName());
+		user.setLastName(dto.getLastName());
+		userRepository.save(user);
+	}
+	
+	public void updateUserPassword(String username, String password){
+		User user = findUserByUsername(username);
+		user.setPassword(passwordEncoder.encode(password));
+		userRepository.save(user);
+	}
+	
+	public boolean passwordMatches(String username, String password){
+		User user = findUserByUsername(username);
+		return passwordEncoder.matches(password, user.getPassword());
+	}
+	
 	public void giveAdminRights(String username){
 		changeRole(username, "ADMIN");
 	}
