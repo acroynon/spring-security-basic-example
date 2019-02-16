@@ -10,6 +10,7 @@ import com.acroynon.ssbe.service.UserService;
 public class UsernameValidator {
 
 	private static int USERNAME_MIN_LENGTH = 3;
+	
 	@Autowired
 	private UserService userService;
 	
