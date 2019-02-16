@@ -1,4 +1,4 @@
-package com.acroynon.ssbe.validation;
+package com.acroynon.bsse.validation;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.validation.BindingResult;
+
+import com.acroynon.ssbe.validation.PasswordValidator;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PasswordValidatorTest {
