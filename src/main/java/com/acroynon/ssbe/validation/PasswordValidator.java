@@ -24,6 +24,11 @@ public class PasswordValidator {
 	
 	// TODO: Secure password check
 	private boolean isValid(String password){
+		// Length
+		if(password.length() < 8) {
+			return false;
+		}
+		
 		return true;
 	}
 	
