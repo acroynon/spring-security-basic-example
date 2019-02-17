@@ -1,4 +1,4 @@
-package com.acroynon.bsse;
+package com.acroynon.ssbe;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

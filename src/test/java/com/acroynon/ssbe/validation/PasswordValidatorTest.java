@@ -1,4 +1,4 @@
-package com.acroynon.bsse.validation;
+package com.acroynon.ssbe.validation;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

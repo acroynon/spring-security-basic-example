@@ -26,13 +26,13 @@ public class CreateUserController {
 	private String successMessage;
 	
 	@GetMapping("/createUser")
-	private String createUserPage(Model model){
+	public String createUserPage(Model model){
 		model.addAttribute("data", new UserCreateDTO());
 		return "createUser";
 	}
 	
 	@PostMapping("/createUser")
-	private String createNewUser(@ModelAttribute("data") UserCreateDTO dto, BindingResult result, Model model){
+	public String createNewUser(@ModelAttribute("data") UserCreateDTO dto, BindingResult result, Model model){
 		validator.validate(dto, result);		
 		if(!result.hasErrors()){
 			userService.addNewUser(dto);
