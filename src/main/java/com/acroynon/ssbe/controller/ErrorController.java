@@ -10,7 +10,6 @@ public class ErrorController {
 	
 	@ExceptionHandler(Exception.class)
 	public ModelAndView errorPage(Exception e){
-		System.out.println("EXCEPTION HANDLER");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("message", e.getMessage());
 		mav.setViewName("error");
