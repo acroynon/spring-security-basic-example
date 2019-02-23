@@ -44,7 +44,7 @@ public class UserAdaptor extends Adaptor<User, UserDTO>{
 		dto.setLastName(user.getLastName());
 		dto.setLocked(user.isLocked());
 		boolean isAdmin = user.getRoles().stream()
-				.filter(r -> r.getRoleName().equals("ADMIN")).findFirst().isPresent();
+				.filter(r -> r!=null && r.getRoleName().equals("ADMIN")).findFirst().isPresent();
 		dto.setAdmin(isAdmin);
 		return dto;
 	}
