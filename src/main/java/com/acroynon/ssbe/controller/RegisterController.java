@@ -27,7 +27,7 @@ public class RegisterController {
 	}
 	
 	@PostMapping("/register")
-	private String registerUser(@ModelAttribute("data") UserRegisterDTO dto, BindingResult result, Model model){
+	public String registerUser(@ModelAttribute("data") UserRegisterDTO dto, BindingResult result, Model model){
 		validator.validate(dto, result);		
 		if(result.hasErrors()){
 			model.addAttribute("data", dto);
