@@ -52,7 +52,7 @@ public class CreateUserControllerTest {
 		Mockito.verify(userService).addNewUser(dto);
 		Mockito.verify(validator).validate(dto, bindingResult);
 		Mockito.verify(model).addAttribute(Mockito.eq("data"), Mockito.eq(dto));
-		Mockito.verify(model).addAttribute(Mockito.eq("successMessage"), Mockito.anyObject());
+		Mockito.verify(model).addAttribute(Mockito.eq("successMessage"), Mockito.any());
 	}
 	
 	@Test

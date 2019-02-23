@@ -77,7 +77,7 @@ public class ProfileControllerTest {
 		Assert.assertEquals("profile", result);
 		Mockito.verify(userService).updateUserDetails(dto);
 		Mockito.verify(model).addAttribute(
-				Mockito.eq("successMessage"), Mockito.eq("User details updated successfully"));
+				Mockito.eq("successMessage"), Mockito.any());
 		andModelObjectsSet(name, dto);
 	}
 	
@@ -99,7 +99,7 @@ public class ProfileControllerTest {
 		Assert.assertEquals("profile", result);
 		andUserValiated(name, passwordDTO);
 		Mockito.verify(userService).updateUserPassword(Mockito.eq(name), Mockito.eq(password));
-		Mockito.verify(model).addAttribute("successMessage", "Password updated successfully");
+		Mockito.verify(model).addAttribute(Mockito.eq("successMessage"), Mockito.any());
 		andModelObjectsSet(name, userDTO, passwordDTO, model);
 	}
 	
@@ -120,7 +120,7 @@ public class ProfileControllerTest {
 		Assert.assertEquals("profile", result);
 		andUserValiated(name, passwordDTO);
 		Mockito.verify(userService, Mockito.never()).updateUserPassword(Mockito.eq(name), Mockito.eq(password));
-		Mockito.verify(model, Mockito.never()).addAttribute("SuccessMessage", "Password updated successfully");
+		Mockito.verify(model, Mockito.never()).addAttribute(Mockito.eq("SuccessMessage"), Mockito.any());
 		andModelObjectsSet(name, userDTO, passwordDTO, model);
 	}
 	
